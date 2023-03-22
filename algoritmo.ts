@@ -1,20 +1,48 @@
-const texto = "Seu texto com acentos como á, é, í, ó, ú, ã, õ, â, ê, ô.";
-const textoSemAcentos = texto.replace(/&([a-zA-Z])(grave|acute|circ|tilde|uml);/g, (match, char, accent) => {
-    const accentsMap = {
-        'a': { 'grave': 'à', 'acute': 'á', 'circ': 'â', 'tilde': 'ã', 'uml': 'ä' },
-        'e': { 'grave': 'è', 'acute': 'é', 'circ': 'ê', 'tilde': 'ẽ', 'uml': 'ë' },
-        'i': { 'grave': 'ì', 'acute': 'í', 'circ': 'î', 'tilde': 'ĩ', 'uml': 'ï' },
-        'o': { 'grave': 'ò', 'acute': 'ó', 'circ': 'ô', 'tilde': 'õ', 'uml': 'ö' },
-        'u': { 'grave': 'ù', 'acute': 'ú', 'circ': 'û', 'tilde': 'ũ', 'uml': 'ü' },
-        'A': { 'grave': 'À', 'acute': 'Á', 'circ': 'Â', 'tilde': 'Ã', 'uml': 'Ä' },
-        'E': { 'grave': 'È', 'acute': 'É', 'circ': 'Ê', 'tilde': 'Ẽ', 'uml': 'Ë' },
-        'I': { 'grave': 'Ì', 'acute': 'Í', 'circ': 'Î', 'tilde': 'Ĩ', 'uml': 'Ï' },
-        'O': { 'grave': 'Ò', 'acute': 'Ó', 'circ': 'Ô', 'tilde': 'Õ', 'uml': 'Ö' },
-        'U': { 'grave': 'Ù', 'acute': 'Ú', 'circ': 'Û', 'tilde': 'Ũ', 'uml': 'Ü' },
-        'c': { 'cedil': 'ç' },
-        'C': { 'cedil': 'Ç' },
-        'n': { 'tilde': 'ñ' },
-        'N': { 'tilde': 'Ñ' }
-    };
-    return accentsMap[char][accent] || match;
+const texto = "Ol&aacute;, tudo bem com voc&circ;e?";
+const regex = /&([a-zA-Z]+);/g;
+const acentos = {
+  Aacute: "Á",
+  aacute: "á",
+  Acirc: "Â",
+  acirc: "â",
+  Agrave: "À",
+  agrave: "à",
+  Aring: "Å",
+  aring: "å",
+  Atilde: "Ã",
+  atilde: "ã",
+  Eacute: "É",
+  eacute: "é",
+  Ecirc: "Ê",
+  ecirc: "ê",
+  Egrave: "È",
+  egrave: "è",
+  Iacute: "Í",
+  iacute: "í",
+  Icirc: "Î",
+  icirc: "î",
+  Igrave: "Ì",
+  igrave: "ì",
+  Oacute: "Ó",
+  oacute: "ó",
+  Ocirc: "Ô",
+  ocirc: "ô",
+  Ograve: "Ò",
+  ograve: "ò",
+  Otilde: "Õ",
+  otilde: "õ",
+  Uacute: "Ú",
+  uacute: "ú",
+  Ucirc: "Û",
+  ucirc: "û",
+  Ugrave: "Ù",
+  ugrave: "ù",
+  Ccedil: "Ç",
+  ccedil: "ç",
+  Ntilde: "Ñ",
+  ntilde: "ñ",
+};
+
+const textoConvertido = texto.replace(regex, (match, entity) => {
+  return acentos[entity] || match;
 });
